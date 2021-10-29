@@ -11,7 +11,7 @@ const ctx = game.getContext('2d')
 
 const scoreChange = document.getElementById('score')
 let score = 0
-
+let collisionCounter = 0
 // startbutton = getElementById('startgame')
 
 // const youWin = document.getElementById('winlose')
@@ -29,20 +29,19 @@ function Character(x, y, color, width, height) {
         ctx.fillStyle = this.color
         ctx.fillRect(this.x, this.y, this.width, this.height)
     }
-
 }
 
 let player = new Character(10, 70, 'gray', 16, 9)
-let enemy = new Character(200, 40, 'red', 15, 8)
-let enemy2 = new Character(220, 50, 'blue', 15, 8)
-let enemy3 = new Character(240, 60, 'cyan', 15, 8)
-let enemy4 = new Character(260, 70, 'purple', 15, 8)
-let enemy5 = new Character(280, 90, 'orange', 15, 8)
-let enemy6 = new Character(260, 100, 'white', 15, 8)
 let bullet = new Character(25, 80, 'yellow', 120, 5)
+let enemy = new Character(200, 40, 'red', 15, 8)
+            let enemy2 = new Character(220, 50, 'blue', 15, 8)
+            let enemy3 = new Character(240, 60, 'cyan', 15, 8)
+            let enemy4 = new Character(260, 70, 'purple', 15, 8)
+            let enemy5 = new Character(280, 90, 'orange', 15, 8)
+            let enemy6 = new Character(260, 100, 'white', 15, 8)
 
 let movementHandler = (e) => {
-    switch(e.key.toLowerCase()) {
+    switch (e.key.toLowerCase()) {
         case ('w'):
             // move up
             player.y -= 10
@@ -84,6 +83,39 @@ let bulletShoot = (e) => {
     }
 }
 
+// const enemies = []
+// function respawn() {
+//     if (gameCounter < 3) {
+
+
+//         // for (let i = 0; i < 6; i++) {
+
+            
+
+//             enemies.push(enemy)
+//             enemies.push(enemy2)
+//             enemies.push(enemy3)
+//             enemies.push(enemy4)
+//             enemies.push(enemy5)
+//             enemies.push(enemy6)
+
+
+
+//             const renderEnemy = () => {
+//                 for (let j = 0; j < enemies.length; j++) {
+//                     enemies[j].render()
+//                 }
+//             }
+
+//             const enemyFlying = () => {
+//                 for (i = 0; i < enemies.length; i++) {
+//                     enemies[i].y += 10
+//                 }
+//             }
+
+//         }
+//     }
+
 const explosion = () => {
     if (
         player.x < enemy.x + enemy.width &&
@@ -93,8 +125,8 @@ const explosion = () => {
     ) {
         // kill enemies
         enemy.alive = false
-        score += 1000
-        return scoreChange.innerText = score
+        score = 1000
+        // return scoreChange.innerText = score
     } if (
         bullet.x < enemy.x + enemy.width &&
         bullet.x + bullet.width > enemy.x &&
@@ -102,8 +134,12 @@ const explosion = () => {
         bullet.y + bullet.height > enemy.y
         ) {   // kill enemies
         enemy.alive = false
-        score += 2000
-        return scoreChange.innerText = score
+        collisionCounter += 1
+        if ( collisionCounter === 1) {
+            score += 2000
+            collisionCounter = 0
+        }
+        // return scoreChange.innerText = score
         }
     if (
         player.x < enemy2.x + enemy2.width &&
@@ -113,8 +149,14 @@ const explosion = () => {
     ) {        
         // kill enemies
         enemy2.alive = false
-        score += 1000
-        return scoreChange.innerText = score 
+        console.log(collisionCounter)
+        collisionCounter += 1
+        if ( collisionCounter === 1) {
+            score += 1000
+            collisionCounter = 0
+        }
+        // score += 1000
+        // return scoreChange.innerText = score 
     }
     if (
         bullet.x < enemy2.x + enemy2.width &&
@@ -123,8 +165,8 @@ const explosion = () => {
         bullet.y + bullet.height > enemy2.y
         ) {   // kill enemies
         enemy2.alive = false
-        score += 2000
-        return scoreChange.innerText = score
+        // score += 2000
+        // return scoreChange.innerText = score
         }
     if (
         player.x < enemy3.x + enemy3.width &&
@@ -134,8 +176,8 @@ const explosion = () => {
     ) {       
         // kill enemies
         enemy3.alive = false
-        score += 1000
-        return scoreChange.innerText = score 
+        // score += 1000
+        // return scoreChange.innerText = score 
     }
     if (
         bullet.x < enemy3.x + enemy3.width &&
@@ -144,8 +186,8 @@ const explosion = () => {
         bullet.y + bullet.height > enemy3.y
         ) {   // kill enemies
         enemy3.alive = false
-        score += 2000
-        return scoreChange.innerText = score
+        // score += 2000
+        // return scoreChange.innerText = score
         }
     if (
         player.x < enemy4.x + enemy4.width &&
@@ -155,8 +197,8 @@ const explosion = () => {
     ) {        
         // kill enemies
         enemy4.alive = false
-        score += 1000
-        return scoreChange.innerText = score 
+        // score += 1000
+        // return scoreChange.innerText = score 
     } 
     if (
         bullet.x < enemy4.x + enemy4.width &&
@@ -165,8 +207,8 @@ const explosion = () => {
         bullet.y + bullet.height > enemy4.y
         ) {   // kill enemies
         enemy4.alive = false
-        score += 2000
-        return scoreChange.innerText = score
+        // score += 2000
+        // return scoreChange.innerText = score
         }
     if (
         player.x < enemy5.x + enemy5.width &&
@@ -176,8 +218,8 @@ const explosion = () => {
     ) {        
         // kill enemies
         enemy5.alive = false
-        score += 1000
-        return scoreChange.innerText = score 
+        // score += 1000
+        // return scoreChange.innerText = score 
     }
     if (
         bullet.x < enemy5.x + enemy5.width &&
@@ -186,8 +228,8 @@ const explosion = () => {
         bullet.y + bullet.height > enemy5.y
         ) {   // kill enemies
         enemy5.alive = false
-        score += 2000
-        return scoreChange.innerText = score
+        // score += 2000
+        // return scoreChange.innerText = score
         }
     if (
         player.x < enemy6.x + enemy6.width &&
@@ -197,8 +239,8 @@ const explosion = () => {
     ) {        
         // kill enemies
         enemy6.alive = false
-        score = 1000
-        return scoreChange.innerText = score 
+        // score = 1000
+        // return scoreChange.innerText = score 
     }
     if (
         bullet.x < enemy6.x + enemy6.width &&
@@ -208,8 +250,8 @@ const explosion = () => {
         ) {   
             // kill enemies
         enemy6.alive = false
-        score += 2000
-        return scoreChange.innerText = score
+        // score += 2000
+        // 
     }
     // if (
     //     enemy.alive + enemy2.alive === false
@@ -224,7 +266,6 @@ const gameLoop = () => {
     // clear the canvas
     ctx.clearRect(0, 0, game.width, game.height)
     // check if enemy is alive, if so, render the enemy
-
     if (enemy.alive) {
         enemy.render()
         enemy.x--
@@ -262,12 +303,15 @@ const gameLoop = () => {
         explosion()
     }
     // render player and bullets
+    // respawn()
     player.render()
     // bullet.render()
     // bullet.x++
+    console.log(score)
+    scoreChange.innerText = score
 }
 // we also need to declare a function that will stop our animation loop
-let stopGameLoop = () => {clearInterval(gameInterval)}
+let stopGameLoop = () => { clearInterval(gameInterval) }
 
 // add event listeners for player movement
 document.addEventListener('keydown', movementHandler)
