@@ -34,11 +34,11 @@ function Character(x, y, color, width, height) {
 let player = new Character(10, 70, 'gray', 16, 9)
 let bullet = new Character(25, 80, 'yellow', 120, 5)
 let enemy = new Character(200, 40, 'red', 15, 8)
-            let enemy2 = new Character(220, 50, 'blue', 15, 8)
-            let enemy3 = new Character(240, 60, 'cyan', 15, 8)
-            let enemy4 = new Character(260, 70, 'purple', 15, 8)
-            let enemy5 = new Character(280, 90, 'orange', 15, 8)
-            let enemy6 = new Character(260, 100, 'white', 15, 8)
+let enemy2 = new Character(220, 50, 'blue', 15, 8)
+let enemy3 = new Character(240, 60, 'cyan', 15, 8)
+let enemy4 = new Character(260, 70, 'purple', 15, 8)
+let enemy5 = new Character(280, 90, 'orange', 15, 8)
+let enemy6 = new Character(260, 100, 'white', 15, 8)
 
 let movementHandler = (e) => {
     switch (e.key.toLowerCase()) {
@@ -165,7 +165,7 @@ const explosion = () => {
         bullet.y + bullet.height > enemy2.y
         ) {   // kill enemies
         enemy2.alive = false
-        // score += 2000
+        score += 2000
         // return scoreChange.innerText = score
         }
     if (
@@ -176,7 +176,7 @@ const explosion = () => {
     ) {       
         // kill enemies
         enemy3.alive = false
-        // score += 1000
+        score += 1000
         // return scoreChange.innerText = score 
     }
     if (
@@ -186,7 +186,7 @@ const explosion = () => {
         bullet.y + bullet.height > enemy3.y
         ) {   // kill enemies
         enemy3.alive = false
-        // score += 2000
+        score += 2000
         // return scoreChange.innerText = score
         }
     if (
@@ -197,7 +197,7 @@ const explosion = () => {
     ) {        
         // kill enemies
         enemy4.alive = false
-        // score += 1000
+        score += 1000
         // return scoreChange.innerText = score 
     } 
     if (
@@ -207,7 +207,7 @@ const explosion = () => {
         bullet.y + bullet.height > enemy4.y
         ) {   // kill enemies
         enemy4.alive = false
-        // score += 2000
+        score += 2000
         // return scoreChange.innerText = score
         }
     if (
@@ -218,7 +218,7 @@ const explosion = () => {
     ) {        
         // kill enemies
         enemy5.alive = false
-        // score += 1000
+        score += 1000
         // return scoreChange.innerText = score 
     }
     if (
@@ -228,7 +228,7 @@ const explosion = () => {
         bullet.y + bullet.height > enemy5.y
         ) {   // kill enemies
         enemy5.alive = false
-        // score += 2000
+        score += 2000
         // return scoreChange.innerText = score
         }
     if (
@@ -239,7 +239,7 @@ const explosion = () => {
     ) {        
         // kill enemies
         enemy6.alive = false
-        // score = 1000
+        score = 1000
         // return scoreChange.innerText = score 
     }
     if (
@@ -250,7 +250,7 @@ const explosion = () => {
         ) {   
             // kill enemies
         enemy6.alive = false
-        // score += 2000
+        score += 2000
         // 
     }
     // if (
