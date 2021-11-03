@@ -124,7 +124,7 @@ const explosion = () => {
         player.y + player.height > enemy.y
     ) {
         // kill enemies
-        enemy.alive = false
+        // enemy.alive = false
         score = 1000
         // return scoreChange.innerText = score
     } if (
@@ -133,10 +133,11 @@ const explosion = () => {
         bullet.y < enemy.y + enemy.height &&
         bullet.y + bullet.height > enemy.y
         ) {   // kill enemies
-        enemy.alive = false
+        // enemy.alive = false
         collisionCounter += 1
+        console.log(collisionCounter)
         if ( collisionCounter === 1) {
-            score += 2000
+            score = 2000
             collisionCounter = 0
         }
         // return scoreChange.innerText = score
@@ -238,8 +239,8 @@ const explosion = () => {
         player.y + player.height > enemy6.y
     ) {        
         // kill enemies
-        enemy6.alive = false
-        score = 1000
+        // enemy6.alive = false
+        score += 1000
         // return scoreChange.innerText = score 
     }
     if (
@@ -249,8 +250,9 @@ const explosion = () => {
         bullet.y + bullet.height > enemy6.y
         ) {   
             // kill enemies
-        enemy6.alive = false
+        // enemy6.alive = false
         score += 2000
+        
         // 
     }
     // if (
@@ -270,40 +272,41 @@ const gameLoop = () => {
         enemy.render()
         enemy.x--
         // add in our detection to see if the hit has been made
-        explosion()
+        // explosion()
     }
     if (enemy2.alive) {
         enemy2.render()
         enemy2.x--
         // add in our detection to see if the hit has been made
-        explosion()
+        // explosion()
     }
     if (enemy3.alive) {
         enemy3.render()
         enemy3.x--
         // add in our detection to see if the hit has been made
-        explosion()
+        // explosion()
     }
     if (enemy4.alive) {
         enemy4.render()
         enemy4.x--
         // add in our detection to see if the hit has been made
-        explosion()
+        // explosion()
     }
     if (enemy5.alive) {
         enemy5.render()
         enemy5.x--
         // add in our detection to see if the hit has been made
-        explosion()
+        // explosion()
     }
     if (enemy6.alive) {
         enemy6.render()
         enemy6.x--
         // add in our detection to see if the hit has been made
-        explosion()
+        // explosion()
     }
     // render player and bullets
     // respawn()
+    explosion()
     player.render()
     // bullet.render()
     // bullet.x++
