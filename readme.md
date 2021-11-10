@@ -21,15 +21,15 @@ Tech Stack: HTML CSS Javascript
 
 MVP
 
--A working initial screen to start game
--An HUD with health status, current score and current level
--A moving space background
+
+-An HUD with current score
 -An airship controlled by player
 -Enemies that block path of player airship
 
 Stretch Goals
-
+-A working initial screen to start game
 -Powerups
+-A moving space background
 -Different types of enemies
 -A "just to enjoy the music" mode in the initial screen
 -More levels
