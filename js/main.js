@@ -1,10 +1,11 @@
 const game = document.getElementById('canvas')
-
 const ctx = game.getContext('2d')
 
+const reset = document.getElementById('resetButton')
+const winner = document.getElementById('over')
+const gameOver = document.getElementById('over')
 const scoreChange = document.getElementById('score')
 let score = 0
-let collisionCounter = 0
 
 function Character(x, y, color, width, height) {
     this.x = x
@@ -27,6 +28,7 @@ let enemy3 = new Character(240, 60, 'cyan', 15, 8)
 let enemy4 = new Character(260, 70, 'purple', 15, 8)
 let enemy5 = new Character(280, 90, 'orange', 15, 8)
 let enemy6 = new Character(260, 100, 'white', 15, 8)
+let enemyArr = [enemy, enemy2, enemy3, enemy4, enemy5, enemy6]
 
 let movementHandler = (e) => {
     switch (e.key.toLowerCase()) {
@@ -64,187 +66,74 @@ let movementHandler = (e) => {
 let bulletShoot = (e) => {
     if (e.code === 'Space') {
         bullet.render()
-        // bullet.x += 5
+        bullet.x += 5
         bullet.x = player.x + 11
         bullet.y = player.y + 2
         console.log('pew pew')
     }
 }
-
-const explosion = () => {
+const alien = enemyArr
+const explosion = (alien) => {
     if (
-        player.x < enemy.x + enemy.width &&
-        player.x + player.width > enemy.x &&
-        player.y < enemy.y + enemy.height &&
-        player.y + player.height > enemy.y
+        player.x < alien.x + alien.width &&
+        player.x + player.width > alien.x &&
+        player.y < alien.y + alien.height &&
+        player.y + player.height > alien.y
     ) {
         // kill enemies
-        enemy.alive = false
-        score += 1000
+        alien.alive = false
+        stopGameLoop()
+        gameOver.innerText = "Loser!"
+        
+
     } if (
-        bullet.x < enemy.x + enemy.width &&
-        bullet.x + bullet.width > enemy.x &&
-        bullet.y < enemy.y + enemy.height &&
-        bullet.y + bullet.height > enemy.y
+        bullet.x < alien.x + alien.width &&
+        bullet.x + bullet.width > alien.x &&
+        bullet.y < alien.y + alien.height &&
+        bullet.y + bullet.height > alien.y
         ) {   // kill enemies
-        enemy.alive = false
+        alien.alive = false
         score += 2000
+
         }
-    if (
-        player.x < enemy2.x + enemy2.width &&
-        player.x + player.width > enemy2.x &&
-        player.y < enemy2.y + enemy2.height &&
-        player.y + player.height > enemy2.y
-    ) {        
-        // kill enemies
-        enemy2.alive = false
-        score += 1000
-    }
-    if (
-        bullet.x < enemy2.x + enemy2.width &&
-        bullet.x + bullet.width > enemy2.x &&
-        bullet.y < enemy2.y + enemy2.height &&
-        bullet.y + bullet.height > enemy2.y
-        ) {   // kill enemies
-        enemy2.alive = false
-        score += 2000
-        }
-    if (
-        player.x < enemy3.x + enemy3.width &&
-        player.x + player.width > enemy3.x &&
-        player.y < enemy3.y + enemy3.height &&
-        player.y + player.height > enemy3.y
-    ) {       
-        // kill enemies
-        enemy3.alive = false
-        score += 1000 
-    }
-    if (
-        bullet.x < enemy3.x + enemy3.width &&
-        bullet.x + bullet.width > enemy3.x &&
-        bullet.y < enemy3.y + enemy3.height &&
-        bullet.y + bullet.height > enemy3.y
-        ) {   // kill enemies
-        enemy3.alive = false
-        score += 2000
-        }
-    if (
-        player.x < enemy4.x + enemy4.width &&
-        player.x + player.width > enemy4.x &&
-        player.y < enemy4.y + enemy4.height &&
-        player.y + player.height > enemy4.y
-    ) {        
-        // kill enemies
-        enemy4.alive = false
-        score += 1000
-    } 
-    if (
-        bullet.x < enemy4.x + enemy4.width &&
-        bullet.x + bullet.width > enemy4.x &&
-        bullet.y < enemy4.y + enemy4.height &&
-        bullet.y + bullet.height > enemy4.y
-        ) {   // kill enemies
-        enemy4.alive = false
-        score += 2000
-        }
-    if (
-        player.x < enemy5.x + enemy5.width &&
-        player.x + player.width > enemy5.x &&
-        player.y < enemy5.y + enemy5.height &&
-        player.y + player.height > enemy5.y
-    ) {        
-        // kill enemies
-        enemy5.alive = false
-        score += 1000
-    }
-    if (
-        bullet.x < enemy5.x + enemy5.width &&
-        bullet.x + bullet.width > enemy5.x &&
-        bullet.y < enemy5.y + enemy5.height &&
-        bullet.y + bullet.height > enemy5.y
-        ) {   // kill enemies
-        enemy5.alive = false
-        score += 2000
-        }
-    if (
-        player.x < enemy6.x + enemy6.width &&
-        player.x + player.width > enemy6.x &&
-        player.y < enemy6.y + enemy6.height &&
-        player.y + player.height > enemy6.y
-    ) {        
-        // kill enemies
-        enemy6.alive = false
-        score = 1000 
-    }
-    if (
-        bullet.x < enemy6.x + enemy6.width &&
-        bullet.x + bullet.width > enemy6.x &&
-        bullet.y < enemy6.y + enemy6.height &&
-        bullet.y + bullet.height > enemy6.y
-        ) {   
-            // kill enemies
-        enemy6.alive = false
-        score += 2000
 }
 
+const winMessage = () => {
+    if (score === 12000) {
+        gameOver.innerText = "Winner!"
+        stopGameLoop()
+    }
 }
 
 const gameLoop = () => {
     // clear the canvas
     ctx.clearRect(0, 0, game.width, game.height)
     // check if enemy is alive, if so, render the enemy
-    if (enemy.alive) {
-        enemy.render()
-        enemy.x--
-        // add in our detection to see if the hit has been made
-        // explosion()
-    }
-    if (enemy2.alive) {
-        enemy2.render()
-        enemy2.x--
-        // add in our detection to see if the hit has been made
-        // explosion()
-    }
-    if (enemy3.alive) {
-        enemy3.render()
-        enemy3.x--
-        // add in our detection to see if the hit has been made
-        // explosion()
-    }
-    if (enemy4.alive) {
-        enemy4.render()
-        enemy4.x--
-        // add in our detection to see if the hit has been made
-        // explosion()
-    }
-    if (enemy5.alive) {
-        enemy5.render()
-        enemy5.x--
-        // add in our detection to see if the hit has been made
-        // explosion()
-    }
-    if (enemy6.alive) {
-        enemy6.render()
-        enemy6.x--
-        // add in our detection to see if the hit has been made
-        // explosion()
-    }
-    // render player and bullets
-    // respawn()
-    explosion()
-    player.render()
+
+winMessage()
+
+   if (player.alive) {
+        player.render()
+   }
+for (let i = 0; i < enemyArr.length; i++) {
     
-    // bullet.render()
-    // bullet.x++
+    if (enemyArr[i].alive) {
+        enemyArr[i].render()
+        enemyArr[i].x--
+        explosion(enemyArr[i])
+    }
+}
     console.log(score)
     scoreChange.innerText = score
 }
-// we also need to declare a function that will stop our animation loop
-let stopGameLoop = () => { clearInterval(gameInterval) }
-
+let stopGameLoop = () => {
+        clearInterval(gameInterval)
+        ctx.clearRect(0, 0, game.width, game.height)
+    }
 // add event listeners for player movement
+
 document.addEventListener('keydown', movementHandler)
 document.addEventListener('keyup', bulletShoot)
 
-// the timing function will determine how and when our game animates
 let gameInterval = setInterval(gameLoop, 50)
+reset.addEventListener('click', gameLoop)
